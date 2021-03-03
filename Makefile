@@ -16,6 +16,7 @@ manpages	:= doc/fd.1
 install: release ${manpages}
 	$(INSTALL)    -d ${DESTDIR}/${BINDIR}
 	$(INSTALL_PROGRAM) -t ${DESTDIR}/${BINDIR}      target/release/${TARGET}
+	$(INSTALL)         -d ${DESTDIR}/${MANDIR}/man1
 	$(INSTALL_DATA)    -t ${DESTDIR}/${MANDIR}/man1 ${manpages}
 release:
 	cargo build --release --locked
