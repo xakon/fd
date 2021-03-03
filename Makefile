@@ -8,10 +8,12 @@ MANDIR		?= ${DATADIR}/man/
 
 TARGET		:= fd
 
-install: release doc/fd.1
+manpages	:= doc/fd.1
+
+install: release ${manpages}
 	$(INSTALL)    -d ${DESTDIR}/${BINDIR}
 	$(INSTALL) -s -t ${DESTDIR}/${BINDIR} target/release/${TARGET}
-	$(INSTALL)    -t ${DESTDIR}/${MANDIR}/man1 -m 0644 doc/fd.1
+	$(INSTALL)    -t ${DESTDIR}/${MANDIR}/man1 -m 0644 ${manpages}
 release:
 	cargo build --release --locked
 
