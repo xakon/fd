@@ -1,4 +1,5 @@
 SHELL		:= /bin/sh
+INSTALL		?= install
 
 PREFIX		?= /usr/local
 
@@ -6,9 +7,9 @@ TARGET		:= fd
 
 
 install: release doc/fd.1
-	cp target/release/${TARGET} ${DESTDIR}/${PREFIX}/bin/
-	strip ${DESTDIR}/${PREFIX}/bin/${TARGET}
-	cp doc/fd.1 ${DESTDIR}/${PREFIX}/share/man/man1
+	$(INSTALL)    -d ${DESTDIR}/${PREFIX}/bin
+	$(INSTALL) -s -t ${DESTDIR}/${PREFIX}/bin target/release/${TARGET}
+	$(INSTALL)    -t ${DESTDIR}/${PREFIX}/share/man/man1 -m 0644 doc/fd.1
 release:
 	cargo build --release --locked
 
